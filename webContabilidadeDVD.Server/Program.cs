@@ -1,28 +1,46 @@
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-app.UseDefaultFiles();
-app.MapStaticAssets();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using webContabilidadeDVD.Server.Data;
+using webContabilidadeDVD.Server.Models;
+using webContabilidadeDVD.Server.Service;
+namespace webContabilidadeDVD.Server
 {
-    app.MapOpenApi();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddScoped<IPlanoService, PlanoService>();
+            builder.Services.AddScoped<ICupomService, CupomService>();
+            // add Services to the container.
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApiContext>(options =>
+                options.UseNpgsql(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
+            var corsPolicy = "default";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(corsPolicy, policy =>
+                {
+                    policy.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
+            });
+
+            builder.Services.AddControllers();
+            builder.Services.Configure<SupersetOptions>(
+            builder.Configuration.GetSection("Superset"));
+            var app = builder.Build();
+
+            app.UseHttpsRedirection();
+            app.UseCors(corsPolicy);
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.MapControllers();
+            app.MapFallbackToFile("/index.html");
+            app.Run();
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
-
-app.Run();
