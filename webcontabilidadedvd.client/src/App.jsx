@@ -6,9 +6,6 @@ import Differentials from '../src/components/Differentials';
 import Testimonials from '../src/components/Testimonials';
 import Contact from '../src/components/Contact';
 import Footer from '../src/components/Footer';
-
-
-
 import './App.css';
 
 function App() {

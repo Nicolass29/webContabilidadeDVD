@@ -1,8 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
-import plugin from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'fs';
 import path from 'path';
@@ -41,7 +40,11 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [plugin(), tailwindcss(), react(), viteSingleFile()],
+    plugins: [
+        react(),
+        tailwindcss(),
+        viteSingleFile()
+    ],
     base: './',
     resolve: {
         alias: {
