@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="webcontabilidadedvd.client/webcontabilidadedvd.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="webContabilidadeDVD.Server/webContabilidadeDVD.Server.csproj" />
+</Solution>

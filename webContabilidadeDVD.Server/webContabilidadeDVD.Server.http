@@ -1,0 +1,6 @@
+@webContabilidadeDVD.Server_HostAddress = http://localhost:5219
+
+GET {{webContabilidadeDVD.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
