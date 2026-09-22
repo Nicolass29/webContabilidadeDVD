@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, MessageCircle } from 'lucide-re
 
 export function Contact() {
     // Ajuste o número do WhatsApp aqui (formato: 55 + DDD + número)
-    const whatsappNumber = "5511932677136";
+    const whatsappNumber = "5511950646477";
     const whatsappMessage = encodeURIComponent("Olá! Gostaria de saber mais sobre os serviços contábeis.");
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 

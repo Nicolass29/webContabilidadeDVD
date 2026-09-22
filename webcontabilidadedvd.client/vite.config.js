@@ -53,9 +53,11 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
+            // AJUSTE AQUI: Redireciona tudo que começar com /api para o backend C#
+            '^/api': {
                 target,
-                secure: false
+                secure: false, // Ignora erro de certificado autoassinado do dotnet dev-certs
+                changeOrigin: true
             }
         },
         port: parseInt(env.DEV_SERVER_PORT || '50071'),
