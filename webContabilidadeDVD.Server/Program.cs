@@ -12,6 +12,9 @@ namespace webContabilidadeDVD.Server
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddScoped<IPlanoService, PlanoService>();
             builder.Services.AddScoped<ICupomService, CupomService>();
+            builder.Services.AddScoped<IContatoService, ContatoService>();
+            builder.Services.AddScoped<IColaboradorService, ColaboradorService>();
+
             // add Services to the container.
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

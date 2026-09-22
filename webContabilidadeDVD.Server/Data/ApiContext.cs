@@ -11,6 +11,9 @@ namespace webContabilidadeDVD.Server.Data
         public DbSet<PlanoFeature> PlanoFeatures { get; set; }
         public DbSet<Cupom> Cupons { get; set; }
         public DbSet<Lead> Leads { get; set; }
+        public DbSet<Colaboradores> Colaboradores { get; set; }
+        public DbSet<Mensagens> Mensagens { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +39,30 @@ namespace webContabilidadeDVD.Server.Data
             modelBuilder.Entity<Cupom>()
                 .HasIndex(c => c.Codigo)
                 .IsUnique();
+            modelBuilder.Entity<Colaboradores>(entity =>
+            {
+                entity.ToTable("colaboradores");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Nome)
+                    .HasColumnName("nome");
+
+                entity.Property(e => e.WhatsApp)
+                    .HasColumnName("whatsapp");
+            });
+
+            modelBuilder.Entity<Mensagens>(entity =>
+            {
+                entity.ToTable("mensagens");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Mensagem)
+                    .HasColumnName("mensagem");
+            });
 
             base.OnModelCreating(modelBuilder);
         }

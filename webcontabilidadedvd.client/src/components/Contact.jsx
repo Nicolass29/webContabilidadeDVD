@@ -1,13 +1,27 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Clock, ArrowRight, MessageCircle } from 'lucide-react';
+import {
+    Phone,
+    Mail,
+    MapPin,
+    Clock,
+    ArrowRight,
+    MessageCircle,
+    X
+} from 'lucide-react';
+import useContato from '../Hook/useContato';
 
 export function Contact() {
-    // Ajuste o número do WhatsApp aqui (formato: 55 + DDD + número)
-    const whatsappNumber = "5511950646477";
-    const whatsappMessage = encodeURIComponent("Olá! Gostaria de saber mais sobre os serviços contábeis.");
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    const {
+        modalAberto,
+        setModalAberto,
+        mensagemId,
+        colaboradores,
+        abrirModalContato,
+        enviarMensagem
+    } = useContato();
 
     return (
+        <>
         <section id="contato" className="py-16 bg-[#050e1d] text-white border-t border-[#9b6b2f]/40 relative overflow-hidden">
 
             {/* Glow de Fundo Sutil */}
@@ -32,16 +46,20 @@ export function Contact() {
                             Estamos prontos para entender suas necessidades e oferecer a melhor solução para o seu negócio.
                         </p>
 
-                        <a
-                            href={whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-blue-600/30 hover:scale-105"
+                        <button
+                            onClick={() => abrirModalContato(1)}
+                            className="w-full flex items-center justify-between gap-4 px-6 py-4 rounded-xl bg-green-600 hover:bg-green-500 text-white font-semibold transition"
                         >
-                            <MessageCircle className="w-4 h-4 fill-current" />
-                            <span>Fale conosco agora</span>
-                            <ArrowRight className="w-4 h-4" />
-                        </a>
+                            <div className="flex items-center gap-3">
+                                <MessageCircle className="w-5 h-5" />
+
+                                <span>
+                                    Fale conosco
+                                </span>
+                            </div>
+
+                            <ArrowRight className="w-5 h-5" />
+                        </button>
                     </div>
 
                     {/* COLUNA 3: Dados de Contato (Lado Direito) */}
@@ -71,7 +89,69 @@ export function Contact() {
 
                 </div>
             </div>
-        </section>
+            </section>
+            {/* Modal */}
+            {modalAberto && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+
+                    <div className="w-full max-w-md rounded-2xl bg-[#050e1d] border border-slate-700 p-6 shadow-2xl">
+
+                        {/* Cabeçalho */}
+                        <div className="flex items-center justify-between mb-6">
+
+                            <div>
+                                <h3 className="text-xl font-bold text-white">
+                                    Fale conosco
+                                </h3>
+
+                                <p className="text-sm text-slate-400 mt-1">
+                                    Com quem você deseja falar?
+                                </p>
+                            </div>
+
+                            <button
+                                onClick={() => setModalAberto(false)}
+                                className="text-slate-400 hover:text-white transition"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
+                        </div>
+
+                        {/* Colaboradores */}
+                        <div className="space-y-3">
+
+                            {colaboradores.map((colaborador) => (
+                                <button
+                                    key={colaborador.id}
+                                    onClick={() =>
+                                        enviarMensagem(
+                                            colaborador.id,
+                                            mensagemId
+                                        )
+                                    }
+                                    className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-800 hover:bg-slate-700 transition text-left"
+                                >
+                                    <div>
+                                        <p className="font-semibold text-white">
+                                            {colaborador.nome}
+                                        </p>
+
+                                        <p className="text-xs text-slate-400">
+                                            Atendimento
+                                        </p>
+                                    </div>
+
+                                    <MessageCircle className="w-5 h-5 text-green-500" />
+                                </button>
+                            ))}
+
+                        </div>
+
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
