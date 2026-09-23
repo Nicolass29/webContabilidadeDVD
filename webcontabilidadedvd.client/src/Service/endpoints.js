@@ -16,13 +16,19 @@ export const Validar = (codigo, planoId, periodicidade) => {
     });
 }
 
-export async function obterContato(colaboradorId, mensagemId) {
-    const response = await api.get("/api/Contato", {
-        params: {
-            colaboradorId,
-            mensagemId
-        }
-    });
+export async function obterContato(colaboradorId, mensagemId, plano, periodicidade, valor) {
+    const params = {
+        colaboradorId,
+        mensagemId
+    };
+
+    if (plano) params.plano = plano;
+    if (periodicidade) params.periodicidade = periodicidade;
+    if (valor !== null && valor !== undefined && valor !== "") {
+        params.valor = valor;
+    }
+
+    const response = await api.get("/api/Contato", { params });
     return response.data;
 }
 

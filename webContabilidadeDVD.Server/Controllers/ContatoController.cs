@@ -17,11 +17,17 @@ namespace webContabilidadeDVD.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterContato(
             [FromQuery] int colaboradorId,
-            [FromQuery] int mensagemId)
+            [FromQuery] int mensagemId,
+            [FromQuery] string? plano = null,
+            [FromQuery] string? periodicidade = null,
+            [FromQuery] decimal? valor = null)
         {
             var contato = await _contatoService.ObterContato(
                 colaboradorId,
-                mensagemId);
+                mensagemId,
+                plano,
+                periodicidade,
+                valor);
 
             if (contato == null)
                 return NotFound("Colaborador ou mensagem não encontrados.");

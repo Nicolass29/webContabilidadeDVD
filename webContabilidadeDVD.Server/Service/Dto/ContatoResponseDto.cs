@@ -7,5 +7,8 @@
         public string WhatsApp { get; set; } = string.Empty;
         public int MensagemId { get; set; }
         public string Mensagem { get; set; } = string.Empty;
+        public string? Plano { get; set; }
+        public string? Periodicidade { get; set; }
+        public decimal? Valor { get; set; }
     }
 }

@@ -15,7 +15,10 @@ namespace webContabilidadeDVD.Server.Service
 
         public async Task<ContatoResponseDto?> ObterContato(
             int colaboradorId,
-            int mensagemId)
+            int mensagemId,
+            string? plano = null,
+            string? periodicidade = null,
+            decimal? valor = null)
         {
             var colaborador = await _context.Colaboradores
                 .AsNoTracking()
@@ -31,13 +34,27 @@ namespace webContabilidadeDVD.Server.Service
             if (mensagem == null)
                 return null;
 
+            var textoMensagem = mensagem.Mensagem;
+            Console.WriteLine(plano);
+            if (!string.IsNullOrWhiteSpace(plano))
+                textoMensagem = textoMensagem.Replace("{plano}", plano);
+            Console.WriteLine(periodicidade);
+            if (!string.IsNullOrWhiteSpace(periodicidade))
+                textoMensagem = textoMensagem.Replace("{periodicidade}", periodicidade.ToLowerInvariant());
+            Console.WriteLine(valor);
+
+            if (valor.HasValue)
+                textoMensagem = textoMensagem.Replace(
+                    "{valor}",
+                    valor.Value.ToString("N2", new System.Globalization.CultureInfo("pt-BR")));
+
             return new ContatoResponseDto
             {
                 ColaboradorId = colaborador.Id,
                 Colaborador = colaborador.Nome,
                 WhatsApp = colaborador.WhatsApp,
                 MensagemId = mensagem.Id,
-                Mensagem = mensagem.Mensagem
+                Mensagem = textoMensagem
             };
         }
     }
