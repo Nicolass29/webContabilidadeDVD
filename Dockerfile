@@ -10,8 +10,8 @@ RUN npm run build
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS server
 WORKDIR /src
 COPY . .
-RUN dotnet publish webContabilidadeDVD.Server/webContabilidadeDVD.Server.csproj \
-    -c Release -o /app -p:BuildProjectReferences=false
+RUN dotnet remove webContabilidadeDVD.Server/webContabilidadeDVD.Server.csproj reference webcontabilidadedvd.client/webcontabilidadedvd.client.esproj \
+ && dotnet publish webContabilidadeDVD.Server/webContabilidadeDVD.Server.csproj -c Release -o /app
 COPY --from=client /src/client/dist /app/wwwroot
 
 # 3) Imagem final
