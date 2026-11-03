@@ -1,5 +1,7 @@
-﻿using webContabilidadeDVD.Server.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using webContabilidadeDVD.Server.Data;
 using webContabilidadeDVD.Server.Service.Dto;
 
 namespace webContabilidadeDVD.Server.Service
@@ -34,19 +36,31 @@ namespace webContabilidadeDVD.Server.Service
             if (mensagem == null)
                 return null;
 
-            var textoMensagem = mensagem.Mensagem;
-            Console.WriteLine(plano);
-            if (!string.IsNullOrWhiteSpace(plano))
-                textoMensagem = textoMensagem.Replace("{plano}", plano);
-            Console.WriteLine(periodicidade);
-            if (!string.IsNullOrWhiteSpace(periodicidade))
-                textoMensagem = textoMensagem.Replace("{periodicidade}", periodicidade.ToLowerInvariant());
-            Console.WriteLine(valor);
+            // Dicionário com os parâmetros disponíveis
+            var parametros = new Dictionary<string, string>
+            {
+                ["plano"] = plano ?? "",
+                ["periodicidade"] = periodicidade?.ToLowerInvariant() ?? "",
+                ["valor"] = valor?.ToString(
+                    "N2",
+                    new CultureInfo("pt-BR")
+                ) ?? ""
+            };
 
-            if (valor.HasValue)
-                textoMensagem = textoMensagem.Replace(
-                    "{valor}",
-                    valor.Value.ToString("N2", new System.Globalization.CultureInfo("pt-BR")));
+            // Substituição automática dos parâmetros
+            var textoMensagem = Regex.Replace(
+                mensagem.Mensagem,
+                @"\{(\w+)\}",
+                match =>
+                {
+                    var chave = match.Groups[1].Value;
+
+                    return parametros.TryGetValue(chave, out var valorParametro)
+                        ? valorParametro
+                        : match.Value;
+                }
+            );
+
 
             return new ContatoResponseDto
             {

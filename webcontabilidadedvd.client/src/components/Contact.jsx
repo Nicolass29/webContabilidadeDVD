@@ -124,12 +124,7 @@ export function Contact() {
                             {colaboradores.map((colaborador) => (
                                 <button
                                     key={colaborador.id}
-                                    onClick={() =>
-                                        enviarMensagem(
-                                            colaborador.id,
-                                            mensagemId
-                                        )
-                                    }
+                                    onClick={() => enviarMensagem(colaborador.id)}
                                     className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-800 hover:bg-slate-700 transition text-left"
                                 >
                                     <div>

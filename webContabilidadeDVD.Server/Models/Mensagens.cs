@@ -7,5 +7,6 @@ namespace webContabilidadeDVD.Server.Models
     {
         public int Id { get; set; }
         public string Mensagem { get; set; } = string.Empty;
+        public string Tipo { get; set; } = string.Empty;
     }
 }

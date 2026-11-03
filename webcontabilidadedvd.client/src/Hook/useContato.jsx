@@ -12,9 +12,15 @@ function useContato() {
     const [colaboradores, setColaboradores] = useState([]);
 
     async function abrirModalContato(dados) {
-        const dadosNormalizados = typeof dados === "object" && dados !== null
-            ? dados
-            : { mensagemId: dados, plano: null, periodicidade: null, valor: null };
+        const dadosNormalizados = {
+            mensagemId: null,
+            plano: null,
+            periodicidade: null,
+            valor: null,
+            ...(typeof dados === "object" && dados !== null
+                ? dados
+                : { mensagemId: dados })
+        };
 
         setDadosMensagem(dadosNormalizados);
         setModalAberto(true);
@@ -25,7 +31,7 @@ function useContato() {
         } catch (error) {
             console.error("Erro ao buscar colaboradores:", error);
         }
-    }
+    }   
 
     async function enviarMensagem(colaboradorId) {
         try {

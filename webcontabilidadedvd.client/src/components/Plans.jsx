@@ -7,11 +7,8 @@ import ModalContato from './ModalContato'; // ajuste o caminho conforme seu proj
 // Mapeamento fixo: id do plano (o que vem em `plano.id`) -> id da mensagem
 // já cadastrada na sua tabela de mensagens. Ajuste os valores abaixo
 // para os ids reais das mensagens de cada plano.
-const MENSAGEM_ID_POR_PLANO = {
-    1: 4, // Básico -> troque pelo id real da mensagem do plano Básico
-    2: 5, // Profissional/intermediário -> troque pelo id real
-    3: 6, // Premium/top -> troque pelo id real
-};
+
+const MENSAGEM_ID_POR_PLANO = 2;
 
 export function Plans() {
     const [plans, setPlans] = useState([]);
@@ -49,23 +46,15 @@ export function Plans() {
     };
 
     const handleContratar = (plano) => {
-        const idDaMensagem = MENSAGEM_ID_POR_PLANO[plano.id];
-
-        if (!idDaMensagem) {
-            console.warn('Plano sem mensagemId mapeado em MENSAGEM_ID_POR_PLANO:', plano);
-            return;
-        }
-
-        // Busca o objeto de preço correspondente à periodicidade atual do estado (Mensal ou Anual)
         const precoObj = plano.precos?.find(
             p => p.periodicidade.toLowerCase() === periodicidade.toLowerCase()
         ) || plano.precos?.[0];
 
-           abrirModalContato({
-            mensagemId: idDaMensagem,
+        abrirModalContato({
+            mensagemId: MENSAGEM_ID_POR_PLANO,
             plano: plano.nome,
             periodicidade: periodicidade,
-            valor: precoObj?.valor || null
+            valor: precoObj?.valor ?? null
         });
     };
 
