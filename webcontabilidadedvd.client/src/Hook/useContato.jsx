@@ -55,7 +55,7 @@ function useContato() {
             const mensagemEncoded = encodeURIComponent(contato.mensagem);
 
             const url = `https://wa.me/${telefoneLimpo}?text=${mensagemEncoded}`;
-            window.open(url, "_blank");
+            window.location.href = url;
         } catch (error) {
             console.error("Erro ao obter contato:", error);
         }

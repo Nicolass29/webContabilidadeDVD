@@ -9,6 +9,7 @@ import {
     X
 } from 'lucide-react';
 import useContato from '../Hook/useContato';
+import { SiInstagram } from "@icons-pack/react-simple-icons";
 
 export function Contact() {
     const {
@@ -67,22 +68,26 @@ export function Contact() {
 
                         <div className="flex items-center gap-3">
                             <Phone className="w-4 h-4 text-[#9b6b2f] shrink-0" />
-                            <span>(11) 98765-4221</span>
+                                <span>(096) 99151-1127</span>
                         </div>
 
                         <div className="flex items-center gap-3">
                             <Mail className="w-4 h-4 text-[#9b6b2f] shrink-0" />
-                            <span className="truncate">contato@davidveigacontabilidade.com.br</span>
+                            <span className="truncate">davidveigacontabilidade@gmail.com</span>
                         </div>
 
                         <div className="flex items-center gap-3">
                             <MapPin className="w-4 h-4 text-[#9b6b2f] shrink-0" />
-                            <span>Av. Paulista, 1000 - São Paulo/SP</span>
-                        </div>
+                            <span>Atendimento presencial e online</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <SiInstagram className= "w-4 h-4 text-[#9b6b2f] shrink-0" />
+                                <span>@dvdcontabilidade</span>
+                            </div>
 
                         <div className="flex items-center gap-3">
                             <Clock className="w-4 h-4 text-[#9b6b2f] shrink-0" />
-                            <span>Seg - Sex: 08h às 18h</span>
+                            <span>Seg - Sex: 09h às 18h</span>
                         </div>
 
                     </div>

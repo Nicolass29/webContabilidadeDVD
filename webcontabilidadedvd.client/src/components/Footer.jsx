@@ -77,15 +77,15 @@ export function Footer() {
                         <ul className="space-y-3 text-xs">
                             <li className="flex items-center gap-2.5">
                                 <Phone className="w-3.5 h-3.5 text-[#9b6b2f] shrink-0" />
-                                <span>(11) 93267-7136</span>
+                                <span>(096) 99151-1127</span>
                             </li>
                             <li className="flex items-center gap-2.5">
                                 <Mail className="w-3.5 h-3.5 text-[#9b6b2f] shrink-0" />
-                                <span className="truncate">contato@davidveigacontabilidade.com.br</span>
+                                <span className="truncate">davidveigacontabilidade@gmail.com</span>
                             </li>
                             <li className="flex items-start gap-2.5">
                                 <MapPin className="w-3.5 h-3.5 text-[#9b6b2f] shrink-0 mt-0.5" />
-                                <span>Av. Norte, 1000 - Pará/PA</span>
+                                <span>Atendimento presencial e online</span>
                             </li>
                         </ul>
                     </div>
