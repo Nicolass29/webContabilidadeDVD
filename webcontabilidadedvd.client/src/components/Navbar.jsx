@@ -49,7 +49,7 @@ export function Navbar() {
 
                     {/* Botão Área do Cliente */}
 
-                    <div className="hidden md:flex items-center">
+                {/*     <div className="hidden md:flex items-center">
                         <a
                             href="#area-cliente"
                             className="flex items-center gap-2 border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-white text-sm px-4 py-2 rounded-md transition-all"
@@ -57,7 +57,7 @@ export function Navbar() {
                             <User className="w-4 h-4 text-amber-500" />
                             <span>Área do Cliente</span>
                         </a>
-                    </div>
+                    </div> */}
 
                     {/* Botão Mobile */}
                     <div className="md:hidden">
@@ -85,7 +85,7 @@ export function Navbar() {
                             {link.label}
                         </a>
                     ))}
-                    <a
+                  {/*   <a
                         href="#area-cliente"
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-2 rounded-md border border-[#9b6b2f]/50 bg-[#0b192d] px-4 py-2 text-sm text-white transition-colors hover:border-amber-500/70 hover:bg-[#10223b]"
@@ -93,7 +93,7 @@ export function Navbar() {
                         <User className="p-2 text-slate-300 transition-colors hover:text-amber-500"
  />
                         <span>Área do Cliente</span>
-                    </a>
+                    </a> */}
                 </div>
             )}
         </nav>
